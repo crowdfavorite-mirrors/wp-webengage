@@ -1,9 +1,9 @@
 === WebEngage Feedback, Survey and Notification ===
 Contributors: Official WebEngage Plugin
-Tags: feedback, survey, webengage, web engage, targeting, dashboard, contact, contact form, feedback form, survey form, form builder, feedback inbox, customer support, widget, feedback widget, survey widget, notification, notification widget, call-to-action message, pop-up message, push messaging, real-time messages, user messaging
+Tags: feedback, survey, webengage, web engage, targeting, dashboard, contact, contact form, feedback form, survey form, form builder, feedback inbox, customer support, widget, feedback widget, survey widget, notification, notification widget, call-to-action message, pop-up message, push messaging, real-time messages, user messaging, exit surveys
 Requires at least: 2.7
 Tested up to: 3.3.1
-Stable tag: 1.1.0
+Stable tag: 2.0.0
 
 Get feedback and resolve support queries. Conduct short surveys. Display push notification messages. Love your customers? Get WebEngage now!
 
@@ -44,7 +44,7 @@ Survey - [webengage.com/survey](http://webengage.com/survey)
 Notification - [webengage.com/notification](http://webengage.com/notification)
 
 = Localization =
-WebEngage is currently available in 27 languages - English, Arabic, Bulgarian, Chinese (Traditional), Czech, Danish, Dutch, Finnish, French, Georgian, German, Greek, Hebrew, Hindi, Italian, Japanese, Korean, Norwegian, Polish, Portuguese, Romanian, Russian, Slovak, Slovenian, Spanish, Swedish and Turkish. If your language is missing, you can help us translate. There are just 30 odd phrases that need to be translated. [Let us know](http://webengage.com/contact) if you are interested.
+WebEngage is currently available in 28 languages - English, Arabic, Bulgarian, Chinese (Traditional), Czech, Danish, Dutch, Estonian, Finnish, French, Georgian, German, Greek, Hebrew, Hindi, Italian, Japanese, Korean, Norwegian, Polish, Portuguese, Romanian, Russian, Slovak, Slovenian, Spanish, Swedish and Turkish. If your language is missing, you can help us translate. There are just 30 odd phrases that need to be translated. [Let us know](http://webengage.com/contact) if you are interested.
 
 = Demo =
 Take an online demo to get an idea of how the feedback tab, survey windows and notification messages will look on your website - [demo.webengage.com](http://demo.webengage.com/)
@@ -59,8 +59,12 @@ Take an online demo to get an idea of how the feedback tab, survey windows and n
 * Enhanced targeting capabilities for your surveys and notications.
 * Add more account manangers.
 * Get multi-question surveys. With the free plan, we let you add a single question survey only.
+* Run exit surveys by targeting visitors when they are about to leave your website.
+* Measure your Net Promoter Score by running NPS surveys.
 
 See plans and pricing - [webengage.com/pricing](http://webengage.com/pricing)
+
+For personal websites and blogs, have a FREE plan too. - [webengage.com/pricing-features](http://webengage.com/pricing-features#full)
 
 = Support =
 Email us on support {at} webengage dot com or [contact us](http://webengage.com/contact) for any kind of support. We assure you of a quick revert.
@@ -104,6 +108,11 @@ Email us on support {at} webengage dot com or [contact us](http://webengage.com/
 For any other question(s), please email us on support {at} webengage dot com or [contact us](http://webengage.com/contact). We assure you of a quick revert.
 
 == Changelog ==
+= 2.0.0 =
+* New JavaScript integration code (version 4) released
+* Introduces JavaScript callbacks for all three products - Feedback, Survey and Notification
+* Easy to use API methods for custom invocation
+
 = 1.1.0 =
 * Notification product added to the bundle.
 * Improved version - let's you sign-up for WebEngage directly from within your Wordpress admin.

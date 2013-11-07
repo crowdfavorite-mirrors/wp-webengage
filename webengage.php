@@ -3,7 +3,7 @@
 Plugin Name: WebEngage
 Plugin URI: http://webengage.com
 Description: WebEngage lets you collect feedback from your website visitors. With WebEngage, you can also conduct in-site surveys to gather realtime insights from your customers. Oh, did we tell you that you can also use WebEngage to push notification messages to visitors on your website? Yes, we made throwing discount codes to visitors on your site real easy! To get started: 1) Click the "Activate" link to the left of this description, 2) You'll be taken to the <a href="options-general.php?page=webengage">WebEngage configuration</a> page; sign-up to create your account. That's it! Get an end-to-end feedback, survey management and push notification solution in less than 5 minutes.
-Version: 1.1.0
+Version: 2.0.0
 Author: WebEngage
 Author URI: http://webengage.com/about-us
 */
@@ -13,24 +13,20 @@ function render_webengage() {
   // render the widget if license code is present
   if ($webengage_license_code && $webengage_license_code !== '') {
   ?>
-	<!-- Added via WebEngage Wordpress Plugin 1.1.0 -->
+	<!-- Added via WebEngage Wordpress Plugin 2.0.0 -->
 	<script id="_webengage_script_tag" type="text/javascript">
-		window.webengageWidgetInit = window.webengageWidgetInit || function(){
-			webengage.init({
-				licenseCode:"<?php echo $webengage_license_code; ?>"
-			}).onReady(function(){
-				webengage.render();
-			});
-		};
-
-		(function(d){
-			var _we = d.createElement('script');
-			_we.type = 'text/javascript';
-			_we.async = true;
-			_we.src = (d.location.protocol == 'https:' ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-3.0.js";
-			var _sNode = d.getElementById('_webengage_script_tag');
-			_sNode.parentNode.insertBefore(_we, _sNode);
-		})(document);
+	  var _weq = _weq || {};
+	  _weq['webengage.licenseCode'] = '<?php echo $webengage_license_code; ?>';
+	  _weq['webengage.widgetVersion'] = "4.0";
+	  
+	  (function(d){
+		var _we = d.createElement('script');
+		_we.type = 'text/javascript';
+		_we.async = true;
+		_we.src = (d.location.protocol == 'https:' ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") +  "/js/widget/webengage-min-v-4.0.js";
+		var _sNode = d.getElementById('_webengage_script_tag');
+		_sNode.parentNode.insertBefore(_we, _sNode);
+	  })(document);
 	</script>
 <?php
   }
