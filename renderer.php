@@ -5,7 +5,6 @@
 	$folder = plugin_dir_url(__FILE__);
 	$next_url = plugin_dir_url(__FILE__) . "callback.php?noheader=true";
 	$page_url = $siteUrl . '/wp-admin/options-general.php?page=webengage&noheader=true';
-	$resize_url = plugin_dir_url(__FILE__) . "resize.php";
 	$email = get_option('admin_email');
 	$urlArr = parse_url($siteUrl);
 	$domainName = getSiteDomain();
@@ -29,11 +28,11 @@
 		if($_REQUEST['message']) {
 	 ?>
 		<div id="message" class="updated fade" style="font-size:16px;">
-			<p><?php echo $_REQUEST['message'] ?></p>
+			<p><?php echo htmlspecialchars($_REQUEST['message'], ENT_COMPAT, 'UTF-8') ?></p>
 		</div>
 	<?php } else if ($_REQUEST['error-message']) { ?>
 		<div id="message" class="error fade">
-			<p><?php echo $_REQUEST['error-message'] ?></p>
+			<p><?php echo htmlspecialchars($_REQUEST['error-message'], ENT_COMPAT, 'UTF-8') ?></p>
 		</div>
 	<?php } else if ($we_widget_status != '' && $we_widget_status === 'PENDING') { ?>
 		<?php 
@@ -48,7 +47,7 @@
 	?>
 	<div class="webengage-container">
 		<div class="webengage-logo-container">
-			<img src="//staticz-webengage.s3-ap-southeast-1.amazonaws.com/images/webengage/webengage-logo-header.png"/>
+			<span/>
 		</div>
 
 		<?php if (!$old_value || $old_value === '') { ?>
@@ -58,7 +57,7 @@
 					<hr/>
 					<?php 
 						$src_url = $secure_webengage_host. "/thirdparty/signup.html?". "next=". urlencode($next_url) .
-											 "&em=".urlencode($email)."&domain=".urlencode($siteUrl)."&resizeUrl=".urlencode($resize_url).
+											 "&em=".urlencode($email)."&domain=".urlencode($siteUrl).
 											 "&activationUrl=".urlencode($page_url."&weAction=activate").
 											 "&channel=wordpress" . "&nm=" . urlencode($userFullName);
 					?>
@@ -70,10 +69,12 @@
 					<h3>Already a Webengage user? Add license code for <?php echo $domainName ?></h3>
 					<hr>
 					<p>Copy the license code for <?php echo $domainName; ?> from your <a target="_blank" class="external_icon" href="<?php echo $webengage_host ?>/publisher/dashboard">WebEngage Dashboard</a> and paste it here.</p>
-					<form method="post" action="<?php echo $page_url ?>">
+					<form method="get" action="<?php echo $page_url; ?>">
 							<label for="webengage_license_code"><b>Your WebEngage License Code</b></label>
 							<input id="webengage_license_code" type="text" name="webengage_license_code" placeholder="License Code" value="<?php echo $old_value ?>"/>
 							<input type="hidden" value="wp-save" name="weAction" />
+							<input type="hidden" value="webengage" name="page" />
+							<input type="hidden" value="true" name="noheader" />
 							<input type="hidden" value="submit" name="submit"/>
 							<button type="submit">Save</button>
 					</form>
@@ -83,10 +84,12 @@
 			</div>
 		<?php } else { ?>
 			<div class="webengage-form-container">
-				<form method="post" action="<?php echo $page_url ?>">
+				<form method="get" action="<?php echo $page_url ?>">
 					<label for="webengage_license_code"><b>Your WebEngage License Code</b></label>
 					<input readonly="true" id="webengage_license_code" type="text" name="webengage_license_code" placeholder="License Code" value="<?php echo $old_value ?>"/>
 					<input type="hidden" value="wp-save" name="weAction"/>
+					<input type="hidden" value="webengage" name="page" />
+					<input type="hidden" value="true" name="noheader" />
 					<input type="hidden" value="submit" name="submit"/>
 					<span><a id="update-license-code-link" href="#">Change</a></span>
 					<span>
@@ -111,6 +114,7 @@
 						<ul style="padding-left:30px;">
 							<li style="margin-top:6px;"><b>Feedback</b>: Create your feedback tab with custom text and colors. Choose your language for the widget. Manage your categories and fields for feedback.</li>
 							<li><b>Surveys</b>: Create surveys and add targeting rules for them. Modify CSS to customize the survey skin to match your site's look and feel. View realtime analytics & reports.</li>
+							<li><b>Notifications</b>: Create short notification and add targeting rules to show it to a specific set of audience. Drive traffic. Increase conversion. Get real-time reports.</li>
 						</ul>
 					</li>
 					<li>The widget is not appearing on your site even after saving the license code? This is most likely beacause you haven't verified your email yet. <a class="resend-email-link" href="#">Resend the activation email</a>.</li>
@@ -141,8 +145,28 @@
 		<?php } ?>
 	</div>
 	<script type="text/javascript">
-		var resizeIframe = function (height) {
-			document.getElementById('we-signup-iframe').style.height = (parseInt(height) + 60) + "px";
-		};
+	 if (document.getElementById('we-signup-iframe')) {
+	   var resizeIframe = function (height) {
+	     document.getElementById('we-signup-iframe').style.height = (parseInt(height) + 60) + "px";
+	   };
+	   if (typeof window['addEventListener'] !== 'undefined' && typeof window['postMessage'] !== 'undefined') {
+	     window.addEventListener("message", function (e) {
+	       if (e.origin.search('<?php echo $webengage_host_name; ?>') < 0) {
+		 return;
+	       }
+	       resizeIframe(e.data);
+	     }, false);
+	   }
+	   document.getElementById('we-signup-iframe').onload = function () {
+	     if (typeof window['addEventListener'] === 'undefined' || typeof window['postMessage'] === 'undefined') {
+	       document.getElementById('we-signup-iframe').style.height = "450px";
+	     }
+	     setTimeout(function () {
+	       if (document.getElementById('webengage-loading-info')) {
+		 document.getElementById('webengage-loading-info').style.display = 'none';
+	       }
+	     }, 500);
+	   };
+	 }
 	</script>
 </div>

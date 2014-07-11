@@ -35,9 +35,9 @@
   }
   // updating webengage option
   function update_webengage_options() {
-	$wlc = isset($_REQUEST['webengage_license_code']) ? $_REQUEST['webengage_license_code'] : "";
-	$vm = isset($_REQUEST['verification_message']) ? $_REQUEST['verification_message'] : "";
-	$wws = isset($_REQUEST['webengage_widget_status']) ? $_REQUEST['webengage_widget_status'] : "ACTIVE";
+	$wlc = isset($_REQUEST['webengage_license_code']) ? htmlspecialchars($_REQUEST['webengage_license_code'], ENT_COMPAT, 'UTF-8') : "";
+	$vm = isset($_REQUEST['verification_message']) ? htmlspecialchars($_REQUEST['verification_message'], ENT_COMPAT, 'UTF-8') : "";
+	$wws = isset($_REQUEST['webengage_widget_status']) ? htmlspecialchars($_REQUEST['webengage_widget_status'], ENT_COMPAT, 'UTF-8') : "ACTIVE";
 	if(!empty($wlc)) {
 		update_option('webengage_license_code', trim($wlc));
 		update_option('webengage_widget_status', $wws);
@@ -49,9 +49,9 @@
   }
   // activating webengage widget
   function activate_we_widget(){
-	$wlc = isset($_REQUEST['webengage_license_code']) ? $_REQUEST['webengage_license_code'] : "";
+	$wlc = isset($_REQUEST['webengage_license_code']) ? htmlspecialchars($_REQUEST['webengage_license_code'], ENT_COMPAT, 'UTF-8') : "";
 	$old_value = get_option('webengage_license_code');
-	$wws = isset($_REQUEST['webengage_widget_status']) ? $_REQUEST['webengage_widget_status'] : "ACTIVE";
+	$wws = isset($_REQUEST['webengage_widget_status']) ? htmlspecialchars($_REQUEST['webengage_widget_status'], ENT_COMPAT, 'UTF-8') : "ACTIVE";
 	if ($wlc === $old_value) {
 		update_option('webengage_widget_status', $wws);
 		$msg = "Your plugin installation is complete. You can do further customizations from your WebEngage dashboard.";

@@ -1,7 +1,7 @@
 <?php
-	$wlc = isset($_REQUEST['webengage_license_code']) ? $_REQUEST['webengage_license_code'] : "";
-	$vm = isset($_REQUEST['verification_message']) ? $_REQUEST['verification_message'] : "";
-	$wwa = isset($_REQUEST['webengage_widget_status']) ? $_REQUEST['webengage_widget_status'] : "";
+        $wlc = isset($_REQUEST['webengage_license_code']) ? htmlspecialchars($_REQUEST['webengage_license_code'], ENT_COMPAT, 'UTF-8') : "";
+	$vm = isset($_REQUEST['verification_message']) ? htmlspecialchars($_REQUEST['verification_message'], ENT_COMPAT, 'UTF-8') : "";
+	$wwa = isset($_REQUEST['webengage_widget_status']) ? htmlspecialchars($_REQUEST['webengage_widget_status'], ENT_COMPAT, 'UTF-8') : "";
 	if(isset($wlc)){
 		?>
 		<html>
